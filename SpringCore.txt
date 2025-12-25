@@ -31,4 +31,42 @@ Spring Framework - by Rod Johnson in 2003:
       1. Primitive
       2. Collection (List, Set, Map & Properties)
       3. Refrence type/ Object
+
+	
+
+-> Setter/ Property Injection
+
+	-Injection Primitive
+
+			1. create a POJO(A POJO class is a Java class with private fields, public getters/setters, no special inheritance or framework 							dependencies, and optional constructors.)
+			2. Create a config.xml
+				i. Create Beans
+					<beans xmlns="http://www.springframework.org/schema/beans"
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xmlns:context="http://www.springframework.org/schema/context"
+						xmlns:p="http://www.springframework.org/schema/p"
+						xsi:schemaLocation="http://www.springframework.org/schema/beans
+											http://www.springframework.org/schema/beans/spring-beans.xsd
+											http://www.springframework.org/schema/context
+											http://www.springframework.org/schema/context/spring-context.xsd">
+					</beans>
+				ii. Declare bean (for injecting values in pojo)
+					<bean name="give a name" class="fully qualified name of pojo"></bean>
+				iii. Then use property tag to target a fieled or variable
+					<property name="variable name"></propert>
+				iv. With the help of value tag we can inject value 
+					<value>___</value>
+					
+					other methods
+					
+					<bean name="___" class="___">
+						<property name="___" value="___"/>
+						<property name="___" value="___"/>
+						<property name="___" value="___"/>
+					</bean>
+					
+					<bean name="___" class="___" p:id = "___" p:name = "___" p:age = "___"/>
+
+
+
       
