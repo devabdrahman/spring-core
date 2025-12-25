@@ -56,8 +56,37 @@ Spring Framework - by Rod Johnson in 2003:
 					<property name="variable name"></propert>
 				iv. With the help of value tag we can inject value 
 					<value>___</value>
-					
-					other methods
+
+
+		example :
+			<?xml version="1.0" encoding="UTF-8"?>
+			<beans xmlns="http://www.springframework.org/schema/beans"
+       		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       		xmlns:context="http://www.springframework.org/schema/context"
+       		xmlns:p="http://www.springframework.org/schema/p"
+       		xsi:schemaLocation="
+           	http://www.springframework.org/schema/beans
+           	http://www.springframework.org/schema/beans/spring-beans.xsd
+           	http://www.springframework.org/schema/context
+           	http://www.springframework.org/schema/context/spring-context.xsd">
+  		
+			<bean class="com.springcore.Student" name="student1">
+  	<!-- this is our metadata  -->
+  			<property name="studentId"><!-- when we set the field using property than it means we using setter method injection -->
+  			<value>22441</value>
+  			</property>
+  			
+			<property name="studentName">
+  			<value>AbdulRahman</value>
+  			</property>
+  	
+			<property name="studentAddress">
+  			<value>Mumbai</value>
+  			</property>
+		</bean>
+</beans>
+
+		other methods
 					
 					<bean name="___" class="___">
 						<property name="___" value="___"/>
