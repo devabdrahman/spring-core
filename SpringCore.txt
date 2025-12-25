@@ -1,0 +1,34 @@
+Spring Framework - by Rod Johnson in 2003:
+
+  -> What is Spring?
+		- Spring is a dependency injection framework to make java application loosly coupled with the help of IOC (Inversion of Control) container.
+		- It makes the easy development of JavaEE application.
+		- Spring framework is capable of creating an object and injecting it independently.
+
+  -> Spring IOC container
+		- IOC container is a component of Spring framework which manages the lifecycle of an object.
+		- Creating, Storing and Injection are the important work of IOC container.
+		- It requires mainly two things one is configuration and other is bean.
+
+
+  -> ApplicationContext
+		- It is child interface of BeanFactory.
+		- There are some child / implemented class of ApplicationContext.
+			1. ClassPathXMLApplicationContext
+				- It serches of xml configuration in java classpath
+				
+			2. AnnotationConfigApplicationContext
+				- It serches for beans on which annotations are used
+			
+			3. FileSystemXMLApplicationContext
+				- It serches for config file in a file system
+
+  -> ways if DI
+      1. setter/ property injection
+      2. constructo injection
+
+  IOC container can inject this types of values:
+      1. Primitive
+      2. Collection (List, Set, Map & Properties)
+      3. Refrence type/ Object
+      
