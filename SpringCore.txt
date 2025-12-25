@@ -98,6 +98,42 @@ Spring Framework - by Rod Johnson in 2003:
 
 
 	- Injecting Collection Types - List , Set , Map , Properties
+		1. List
+				<property name="___">
+					<list>
+						<value>___</value>
+						<value>___</value><!-- Allows Duplicate -->
+						<value>___</value>
+						<null/>
+					</list>
+				</property>
+				
+			2. Set
+				<property name="___">
+					<set>
+						<value>___</value>
+						<value>___</value>
+						<value>___</value>
+						<null/>
+					</set>
+				</property
+				
+			3. Map
+				<property name="courses">
+					<map>
+						<entry key="Java" value="2months"/>
+						<entry key="Python" value="1.2months"/>
+						<entry key="Solidity" value="1month"/>
+					</map>
+				</property>
+				
+			4. Properties
+				<property name="hobbies">
+					<props>
+						<prop key="1st">Running</prop>
+						<prop key="2nd">Cricket</prop>
+					</props>
+				</property>
 	
 
 
