@@ -97,5 +97,8 @@ Spring Framework - by Rod Johnson in 2003:
 					<bean name="___" class="___" p:id = "___" p:name = "___" p:age = "___"/>
 
 
+	- Injecting Collection Types - List , Set , Map , Properties
+	
+
 
       
