@@ -161,9 +161,126 @@ Spring Framework - by Rod Johnson in 2003:
 
 		another way:
 			<property name="ob" ref="bref" />
-
-	
 </bean>
-
 </beans>
-      
+
+	-> Constructor Injection
+	
+		- Injecting Premitives
+		
+			1. Create a pojo.
+			2. Create a config.xml file
+				i. Create Beans
+					<beans xmlns="http://www.springframework.org/schema/beans"
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xmlns:context="http://www.springframework.org/schema/context"
+						xmlns:c="http://www.springframework.org/schema/c"
+						xsi:schemaLocation="http://www.springframework.org/schema/beans
+											http://www.springframework.org/schema/beans/spring-beans.xsd
+											http://www.springframework.org/schema/context
+											http://www.springframework.org/schema/context/spring-context.xsd">
+					</beans>
+				ii. Declare bean (for injecting values in pojo)
+					<bean name="give a name" class="fully qualified name of pojo"></bean>
+				iii. Then use property tag to target a fieled or variable
+					<constructor-arg name="variable name"></constructor-arg>
+				iv. With the help of value tag we can inject value 
+					<value>___</value>
+					
+					other methods
+					
+					<bean name="___" class="___">
+						<constructor-arg name="___" value="___"/>
+						<constructor-arg name="___" value="___"/>
+						<constructor-arg name="___" value="___"/>
+					</bean>
+					
+					<bean name="___" class="___" c:id = "___" p:name = "___" p:age = "___"/>
+					(This method is ambigious.
+					Spring uses the constructor parameter names, and those are not available at runtime unless the class is compiled with a 						special flag.
+					Spring needs the parameter names but Java does NOT store constructor parameter names in the .class file by default.
+					So Spring cannot match because the constructor parameters are not called id, name, age at runtime.)
+					
+					<bean name="___" class="___" c:_0 = "___" p:_1 = "___" p:_2 = "___"/>
+					
+		- Injecting Reference Type (Object)
+			
+			1. In pojo we'll add a fieled with another class type
+				private Address sAddress;
+			2. Create a bean for both classes and use refernce to inject a bean into another
+				for example : 
+					
+					Student have an address
+					
+					<bean name="___" class="___.Address" p:city = "city" p:state = "state"/> 
+					
+					we create address bean first because there is no dependency on any other object.
+					In case of Student, it is dependent upon address bean.
+					
+					method 1:
+						<bean name="s1" class="com.SpringCore._3_Refernc_or_Object_Injection.Student" c:_0 = "Salim" c:_1 = "101">
+							<constructor-arg>
+								<ref bean="add"/>
+							</constructor-arg>
+						</bean>
+						
+					method 2:
+						<bean name="s2" class="com.SpringCore._3_Refernc_or_Object_Injection.Student" c:_0 = "Asgar" c:_1 = "102">
+							<constructor-arg ref="add"/>
+						</bean>	
+						
+					method 3:
+						<bean name="s3" class="com.SpringCore._3_Refernc_or_Object_Injection.Student" c:_0 = "Asgar" c:_1 = "102" c:_2-ref = "add"/>
+		
+
+		- Injecting Collection Types - List , Set , Map , Properties
+			1. List
+			
+				<constructor-arg name="phones">
+					<list>
+						<value>89456231</value>
+						<null/>
+						<value>64578231</value>
+					</list>
+				</constructor-arg>
+				
+			2. Set
+			
+				<constructor-arg>
+					<set>
+						<value>Kanpur</value>
+						<value>Haryana</value>
+					</set>
+				</constructor-arg>
+				
+			3. Map
+			
+				<constructor-arg name="courses">
+					<map>
+						<entry key="Java" value="2months"/>
+						<entry key="SQL" value="3months"/>
+					</map>
+				</constructor-arg>
+				
+			4. Properties
+			
+				<constructor-arg name="hobbies">
+					<props>
+						<prop key="1">Workout</prop>
+						<prop key="2">Hangout</prop>
+					</props>
+				</constructor-arg>
+				
+		- Ambiguity in Constructor Injection
+			- In a case where we have overloaded constructors to set value of a fieled
+				Example : Addition(long a)
+							Addition(int a)
+				Then which one will be used?
+			- The answer is it will follow order which one accept the value first will be used.
+			- If we have Strint too 
+				Example : Addition(long a)
+							Addition(int a)
+							Addition(String a)
+			- By default each value is considered as String then the String parameter will used
+		
+	-> Life Cycle of Spring Bean
