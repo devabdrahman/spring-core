@@ -302,7 +302,7 @@ ________________________________________________________________________________
 				init() : public void init()
 				destroy() : public void destroy()
 	
-->Configure Technique
+->Configure Technique(Implementing Bean Life Cycle)
 	-XML
 	-Spring Interface
 	-annotation
