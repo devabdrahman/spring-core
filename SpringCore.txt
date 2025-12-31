@@ -282,5 +282,46 @@ Spring Framework - by Rod Johnson in 2003:
 							Addition(int a)
 							Addition(String a)
 			- By default each value is considered as String then the String parameter will used
-		
+___________________________________________________________________________________________________
 	-> Life Cycle of Spring Bean
+		----------------------
+		- We need to provide two things to spring container
+			i. Bean
+			ii. Configuration file
+		
+		- lifecycle 
+			stage 1: Container will create object of bean (Instantiation)
+			stage 2: It will set the value in the fieleds (Initializaion)
+			stage 3: Invokes init() (Connections and startup code can be written here)
+			stage 4: Bean object ready to use (Dependency Injection)
+			stage 5: Invokes destroy() (Cleanup code, closing connections & etc)
+			stage 6: Object is destroyed
+- Spring framework provides functionality to customize the init() and destroy() in our userdefined code. We can also change their name in our       code but their signature shouls be same .
+			There are 4 ways to utilize init() & destroy() method in our code
+			Method sifnature:
+				init() : public void init()
+				destroy() : public void destroy()
+	
+->Configure Technique
+	-XML
+	-Spring Interface
+	-annotation
+
+	- Using XML
+					1. Create two methods with same signature as init() & destroy in bean (method name can be chnaged)
+					2. While creating bean in configuration xml we have to define both method by their name
+						for init : init-method="___"
+						for destroy : destroy-method="___"
+						
+				- Using Interface
+					1. There are two predefined interface for both methods which contains method by overriding them we can change the logic.
+						for init : InitializingBean
+						for destroy : DisposableBean
+				
+				- Using Annotation
+					1. To use dependency to access annotations for init() & destroy()
+					2. Use <context:annotation-config/> in configuration xml.
+					3. Create two methods with same signature as init() & destroy in bean (method name can be chnaged)
+					4. Use annotations
+						for init : @PostConstruct
+						for destroy : @PreDestroy
