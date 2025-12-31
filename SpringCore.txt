@@ -312,8 +312,60 @@ ________________________________________________________________________________
 					2. While creating bean in configuration xml we have to define both method by their name
 						for init : init-method="___"
 						for destroy : destroy-method="___"
-						
-				- Using Interface
+
+				example:
+						main.java
+								----------
+							package com.springcore.lifecycle;
+							import org.springframework.context.support.ClassPathXmlApplicationContext;
+							public class Main {
+							public static void main(String[] args) {
+							ClassPathXmlApplicationContext  context = new ClassPathXmlApplicationContext("com/springcore/lifecycle/config.xml");
+							Samosa samosa =  (Samosa)context.getBean("samosa");
+							System.out.println(samosa);
+							context.registerShutdownHook(); //enabling shutdown hook
+							}
+							}
+								
+						config.xml
+							<bean class="com.springcore.lifecycle.Samosa" name="samosa" init-method="init" destroy-method="destroy">
+							<property name="price" value="20" />
+							</bean>
+
+						samosa.java
+							package com.springcore.lifecycle;
+							//will gonna initialize through setter
+							public class Samosa {
+							private double price;
+							public double getPrice() {
+							return price;
+							}
+							public void setPrice(double price) {
+							this.price = price;
+							System.out.println("Setting property");
+							}
+
+							public Samosa() {
+							super();
+							// TODO Auto-generated constructor stub
+							}
+
+							@Override
+							public String toString() {
+							return "Samosa [price=" + price + "]";
+							}
+	
+							public void init()
+							{
+								System.out.println("inside init method");
+							}
+							public void destroy()
+							{
+								System.out.println("inside destroy method");
+							}	
+							}
+	 ------------------------------------------------
+					- Using Interface
 					1. There are two predefined interface for both methods which contains method by overriding them we can change the logic.
 						for init : InitializingBean
 						for destroy : DisposableBean
@@ -322,6 +374,14 @@ ________________________________________________________________________________
 					1. To use dependency to access annotations for init() & destroy()
 					2. Use <context:annotation-config/> in configuration xml.
 					3. Create two methods with same signature as init() & destroy in bean (method name can be chnaged)
-					4. Use annotations
+					4. This was depricated in java 9 and + so we have to add this dependencies in pom.xml
+							<dependency>
+							<groupId>javax.annotation</groupId>
+							<artifactId>javax.annotation-api</artifactId>
+							<version>1.3.2</version>
+							</dependency>
+					5. Use annotations
 						for init : @PostConstruct
 						for destroy : @PreDestroy
+						and to enable annotation add this line in config.xml	
+						<context:annotation-config />
