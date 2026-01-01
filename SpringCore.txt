@@ -387,10 +387,10 @@ ________________________________________________________________________________
 						<context:annotation-config />
 
 -> Autowiring
-		- Spring container injects a bean ovject whenever we do it manullay but aurowiring is a mechanism which can mek this process automatic.
+		- Spring container injects a bean ovject whenever we do it manullay but aurowiring is a mechanism which can make this process automatic.
 		- Simply we link an object to another just like a wire.
 		- It reduces the code.
-		- It cant be used on primitives.
+		- It can't be used on primitives and strings.
 		- There are two ways of autowiring 
 			
 			i. XML
