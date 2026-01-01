@@ -385,3 +385,48 @@ ________________________________________________________________________________
 						for destroy : @PreDestroy
 						and to enable annotation add this line in config.xml	
 						<context:annotation-config />
+
+-> Autowiring
+		- Spring container injects a bean ovject whenever we do it manullay but aurowiring is a mechanism which can mek this process automatic.
+		- Simply we link an object to another just like a wire.
+		- It reduces the code.
+		- It cant be used on primitives.
+		- There are two ways of autowiring 
+			
+			i. XML
+				
+				1. no
+					- Autowiring is disabled.
+					- If injeciton is perfprmed then it can cause error.
+					
+				2. byName (uses property injection)
+					- Dependent bean should be created first in XML.
+					- Name of Bean given in XML and the name of variable of independent class must be same, otherwise the varibale value will be 						null.
+
+				3. byType (uses property injection)
+					- Injection will be done on basis of the type of object variable in independent class.
+					- If there will be multiple bean in xml of dependent class then it will be cause error.
+				
+				4. constructor-arg
+					- There should be a constructor in bean which only has single parameter of dependent bean type.
+					- Bean name must be same as construcyor parameter variable name.
+				
+				5. autoDetect
+					- It is deprecated since Sprin3.
+					- It automatically chose the best autowiring strategy (constructor or byType).
+					- Strategy used 
+						STEP 1 → Does the class have a zero-argument constructor?
+							If no, then constructor autowiring is forced.
+							If yes, Spring goes to Step 2.
+						STEP 2 → Does the class have at least one constructor with arguments?
+							If yes, Spring tries to autowire using that constructor (autowire="constructor").
+							If no, then it falls back to autowire="byType".
+			
+			ii. Annotations
+				- To enable @Autowired use <context:annotation-config/> in configuration xml.
+				- At three places we can use annotation.
+				
+					1. On fieled
+					2. On Setter method (uses property injection)
+					3. On Constructor (which has parameter) (uses constructor injection)
+
