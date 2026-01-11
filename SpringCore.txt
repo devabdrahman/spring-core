@@ -430,3 +430,51 @@ ________________________________________________________________________________
 					2. On Setter method (uses property injection)
 					3. On Constructor (which has parameter) (uses constructor injection)
 
+			@qualifier("___")
+			- If we have multiple bean of same class in config XML then it can cause the ambiguity while autowiring. Container will be confused which bean has to be 				injected.
+			- Qualifier annotation removes the ambiguity by providing name of bean as annotation parameter.
+
+
+	-> Standalone Collections
+		- Standalone means simply create once and use n numbers of times.
+		- Spring framework provides standalone functionality for collections, once the data of standalone collection is created then it can be used or injected several 		  times.
+		- Steps for creating standalone collection:
+		
+			step 1 : Add util schema in <beans> tag 
+						xmlns:util="http://www.springframework.org/schema/util"
+						
+			step 2 : Add util schema location in <beans> tag  xsi:schemaLocation property
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util.xsd
+						
+			step 3 : Create an instance for any of collection class
+				i. Use <util:list> tag.
+				ii. Use list-class="___" as attribute in <util:list> tag to define collection class.
+				iii. Use id="___" as attribute in <util:list> tag to target the instange while injecting.
+				iv. Between <util:list> & </util:list> insert values according to collection.
+				
+			step 5 : At the time of creating bean in configuration XML file we can use ref="id of standalone collection" to inject standalone collection.
+
+		example:
+			<util:list list-class="java.util.LinkedList" id="mybestfriend">
+			<value>abdul rahman</value>
+			<value>abdul raheem</value>
+			<value>adiba</value>
+			<value>abdul azeem</value>
+			<value>abdullah</value>
+		</util:list>
+
+		<bean class="com.springcore.standalone_collection.Person" name="person1">
+		<!-- if we use list by default it will take it as a array list but if I want in linked list then -->
+
+
+		<property name="friends">
+		<ref  bean="mybestfriend" />
+		</property>
+		</bean>
+	or
+		<bean>
+		<property name="friends	" ref="mybestfriend" />	
+		</bean>
+ 
+			
