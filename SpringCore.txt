@@ -478,3 +478,23 @@ ________________________________________________________________________________
 		</bean>
  
 			
+	-> Stereotype Annotation
+		Till now we have learnt the bean configuration in xml file
+		
+		@Component
+			- Till now we have learnt the bean configuration in xml file using <bean> tag.
+			- Use @Component annotation on bean class, It gives an aknowledgement to trat it as a bean class.
+			- <contect:component-scan base-package="___"/> this tag should be written in configuration file and mention the base package, The base pakage and all of                  its sub pakages are going to be scan for @Component annotation.
+			- According to java namimng convention the name of class must start with captial letter followed by small. When all the component are scanned and                         @Component annotation found then the bean will initialized by container automatically.
+			- Then container will use class name in all lower case as bean name.
+				Example : Student -> student
+			- Using that name we can get the bean of the @component marked classes.
+			- We can change the name of bean by giving a new name as argument in @Component("___")
+			
+		@Value	:In Spring, @Value with @Component is used to automatically pull a list of values from a settings file and put them into a Java Collection,
+			
+			public class Student {
+			@Value("abdulrahman")
+			private String studentName;
+			@Value("Mumbai")
+			private String studentCity;
