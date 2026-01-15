@@ -498,3 +498,92 @@ ________________________________________________________________________________
 			private String studentName;
 			@Value("Mumbai")
 			private String studentCity;
+
+	-> Bean Scope
+		- Scope is use to define in which manner the instance of bean should be produced.
+		- Scope is an attribute while definig a bean using XML configuration <bean scope="___">.
+		- It can be also defined while using @Scope("___") annotation for bean after @component().
+		- There are 5 diffrent scopes of beans.
+			
+			i. Singleton
+				- It is default scope of Bean.
+				- If same name of bean is fetched multiple time then container is going to return the same object.
+				
+			ii. ProtoType
+				- It can be set as scope manually.
+				- Each time it will return a new instance of bean.
+			
+			iii. Request
+			
+			iv. Session
+			
+			v. GlobalSession
+			
+	-> Spring Expression Language
+		- SpEL supports parsing and executing expression with the help of @value("#{___}") annotation.
+		- Primitives, variables, object, call static methods, turnery operators & symbols can be used as a expression.
+		- Any symbol or expression which returns a value can be use in SpEL.
+		- Examples :
+			@value("#{10+10}")							//20 will be injected in the fieled
+			@Value("#{8>6 ? "greater" : "smaller" ;}") 	//greater will be injected in the fieled
+			Static method which returns some value
+			Object creation
+			methods calling
+			Variables (static directly and non static with the help of bean name.
+			Id of standalone 	
+		-SpEL only sees:
+			bean names
+			system properties
+			environment properties
+			static fields
+			methods
+			other beans
+			It does NOT automatically see your own fields & variables.
+		
+		-SpEL diffrent Expresssion techniques 	
+			
+			- Methametical expression in SpEL
+				i. It'll solve the expression and the final answer will be injected in variable
+				ii. @Value("#{ 10+20 }")
+				
+			- If else in SpeEL
+				i. It'll inject true or false in variable with boolean datatype based on condition.
+				ii. @Value("#{ 8>10 ? 1 : 0 }")
+				
+			- Accessing static variable from non component class in SpEL
+				i. Field must be static as well as public.
+				ii. @Value("#{ T(com.SpringCore._16_SpEL.MyContent).x }")
+				iii. T loads the class
+				iv. SpEL accesses fields using reflection, normal java code can access the fields with default acccess modifier in same package but reflection cant.
+				
+			- Accessing static method from non component class in SpEL
+				i. Method must be static as well as public.
+				ii. SpEL accesses methods using reflection, normal java code can access the mmethods with default acccess modifier in same package but reflection cant.
+				iii. @Value("#{ T(com.SpringCore._16_SpEL.MyContent).num1(100) }")
+				iv. T loads the class
+				
+			- Creating Object using SpEL
+				i. Use new keyword followed by fully qalified name of class and use parentheses just like calling constructor
+				ii. @Value("#{ new com.SpringCore._16_SpEL.MyContent() }")
+				
+			- Using condition in SpEL/ If else with return statement
+				i. It will set value in variable according to the condition just like ternary operator.
+				ii. @Value("#{ 8-6 < 4 }")
+				
+			- Accessing instance member from non component class in SpEL
+				i Using new keyword, object of a class can be created. With the help of this anonymus object we can access non static members.
+				ii. @Value("#{ new com.SpringCore._16_SpEL.MyContent().y }")
+				
+			- Accessing instance method from non component class in SpEL
+				i Using new keyword, object of a class can be created. With the help of this anonymus object we can access non static methods which returns some value.
+				ii. @Value("#{ new com.SpringCore._16_SpEL.MyContent().y() }")
+				
+			- Accessing instance member from a componenet in SpEL
+				i. With help of component or bean name all the non static members can be accessed in from a component.
+				ii. @Value("#{ bean.a }")
+				iii. Here bean is component name
+				
+			- Accessing instance methods from a componenet in SpEL
+				i. With help of component or bean name all the non static methods can be accessed in from a component.
+				ii. @Value("#{ bean.a() }")
+				iii. Here bean is component name
